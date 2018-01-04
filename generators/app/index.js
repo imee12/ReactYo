@@ -26,13 +26,7 @@ module.exports = class extends Generator {
 
   prompting() {
     // Have Yeoman greet the user.
-    this.log(
-      yosay(
-        'Welcome to Imees Practice  ' +
-          chalk.red('generator-react') +
-          ' generator!',
-      ),
-    );
+    this.log(yosay(`Welcome to Imee's Practice ${chalk.red('generator-react')} generator`));
 
     const prompts = [
       {
@@ -60,7 +54,7 @@ module.exports = class extends Generator {
       this.destinationPath('package.json'),
       {
         name: this.props.name,
-      },
+      }
     );
 
     this.fs.copyTpl(
@@ -68,49 +62,49 @@ module.exports = class extends Generator {
       this.destinationPath('bower.json'),
       {
         name: this.props.name,
-      },
+      }
     );
     this.fs.copy(
       this.templatePath('babelrc'),
-      this.destinationPath('.babelrc'),
+      this.destinationPath('.babelrc')
     );
     this.fs.copy(
       this.templatePath('bowerrc'),
-      this.destinationPath('.bowerrc'),
+      this.destinationPath('.bowerrc')
     );
 
     this.fs.copy(
       this.templatePath('_webpack.config.js'),
-      this.destinationPath('webpack.config.js'),
+      this.destinationPath('webpack.config.js')
     );
     this.fs.copy(
       this.templatePath('_index.html'),
-      this.destinationPath('index.html'),
+      this.destinationPath('index.html')
     );
 
     this.fs.copy(
       this.templatePath('_history/_configureHistory.js'),
-      this.destinationPath('src/history/configureHistory.js'),
+      this.destinationPath('src/history/configureHistory.js')
     );
 
     this.fs.copy(
       this.templatePath('_index.js'),
-      this.destinationPath('src/index.js'),
+      this.destinationPath('src/index.js')
     );
 
     this.fs.copy(
       this.templatePath('_store/_configureStore.js'),
-      this.destinationPath('src/store/configureStore.js'),
+      this.destinationPath('src/store/configureStore.js')
     );
 
     this.fs.copy(
       this.templatePath('_components/_App.jsx'),
-      this.destinationPath('src/App.jsx'),
+      this.destinationPath('src/App.jsx')
     );
 
     this.fs.copy(
       this.templatePath('_reducers/_index.js'),
-      this.destinationPath('src/reducers/index.js'),
+      this.destinationPath('src/reducers/index.js')
     );
 
   }
