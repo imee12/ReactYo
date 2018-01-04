@@ -1,7 +1,7 @@
 {
     "name": "<%= name %>",
     "scripts": {
-        "start": "webpack-dev-server"
+      "start": "webpack-dev-server --progress --inline --hot --open"
     },
     "devDependencies": {
     "babel-cli": "^6.26.0",

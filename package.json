@@ -1,7 +1,7 @@
 {
-    "name": "stuff",
+    "name": "App",
     "scripts": {
-        "start": "webpack-dev-server --progress --inline --hot --open"
+      "start": "webpack-dev-server --progress --inline --hot --open"
     },
     "devDependencies": {
         "babel-cli": "^6.26.0",

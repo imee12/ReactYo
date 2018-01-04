@@ -1,3 +1,9 @@
 {
-  "stuff": {}
+  "Oh": {
+    "appName": "App",
+    "test": "test"
+  },
+  "App": {
+    "Component": "Stuff"
+  }
 }

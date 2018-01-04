@@ -8,21 +8,21 @@ const yosay = require('yosay');
 module.exports = class extends Generator {
 
 
-  // constructor(args, options) {
-  //
-  //   super(args, options);
-  //
-  //   // Make options available
-  //   this.option('skip-welcome-message', {
-  //     desc: 'Skip the welcome message',
-  //     type: Boolean,
-  //     defaults: false
-  //   });
-  //
-  //
-  //
-  //   this.config.save();
-  // }
+  constructor(args, options) {
+
+    super(args, options);
+
+    // Make options available
+    this.option('skip-welcome-message', {
+      desc: 'Skip the welcome message',
+      type: Boolean,
+      defaults: false
+    });
+
+
+
+    this.config.save();
+  }
 
   prompting() {
     // Have Yeoman greet the user.
@@ -39,10 +39,12 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'name',
         message: 'What would you like to name your app ?',
-        default: this.name,
+        default: 'App',
       },
 
     ];
+  //  this.config.save('appName', this.name);
+
 
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
@@ -51,6 +53,9 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    this.config.set('appName', this.props.name);
+    this.config.set('test', 'test');
+
     // this.fs.copy(
     //   this.templatePath('dummyfile.html'),
     //   this.destinationPath('practicePath/dummyfile.html')

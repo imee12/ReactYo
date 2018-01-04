@@ -32,7 +32,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    console.log('writing - zap');
+    this.config.set('Component', this.options['name']);
     this.fs.copyTpl(
       this.templatePath('_Component.jsx'),
       this.destinationPath('src/components/' + this.options['name'] + '.jsx'),
