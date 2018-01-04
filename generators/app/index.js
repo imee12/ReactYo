@@ -104,8 +104,8 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
-      this.templatePath('_components/_App.jsx'),
-      this.destinationPath('src/App.jsx'),
+      this.templatePath('_App.jsx'),
+      this.destinationPath('src/components/App.jsx'),
     );
 
     this.fs.copy(
