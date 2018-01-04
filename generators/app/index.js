@@ -98,8 +98,13 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
+<<<<<<< HEAD
       this.templatePath('_components/_App.jsx'),
       this.destinationPath('src/App.jsx')
+=======
+      this.templatePath('_App.jsx'),
+      this.destinationPath('src/components/App.jsx'),
+>>>>>>> 8172826a2b3392a19eb6c38be79a50dbd25e808c
     );
 
     this.fs.copy(

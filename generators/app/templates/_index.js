@@ -9,7 +9,7 @@ import configureStore from './store/configureStore';
 import configureHistory from './history/configureHistory';
 
 // import App from './components/App';
-import App from './App';
+import App from './components/App';
 
 
 // require('./scss/index.scss');
@@ -34,5 +34,5 @@ const render = (Component) => {
 render(App);
 
 if (module.hot) {
-  module.hot.accept('./App', () => { render(App); });
+  module.hot.accept('./components/App', () => { render(App); });
 }
