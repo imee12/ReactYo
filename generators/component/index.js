@@ -19,7 +19,8 @@ module.exports = class extends Generator {
 
   this.option('path', {
     desc: 'path for component begining with src/components',
-    type: String
+    type: String,
+    defaults: 'src/components'
   });
 
   this.option('flux', {
@@ -38,14 +39,8 @@ module.exports = class extends Generator {
     defaults: '/'
   });
 
-  // this.log(this.options['name', 'flux', 'route', 'path']);
-  this.log(this.options.flux);
-  // this.option('skip-install');
-
-  // Use our plain template as source
-  // this.sourceRoot(baseRootPath);
-
   this.config.save();
+  this.log(this.options.name);
 }
 
   prompting() {
@@ -55,9 +50,9 @@ module.exports = class extends Generator {
   writing() {
     this.log('writing - zap');
 
-    const componentDestination = this.options.path
+    const componentDestination = this.options.path !== 'src/components'
       ? `src/components/${this.options.path}/${this.options.name}.jsx`
-      : `src/components/${this.options.name}.jsx`;
+      : `${this.options.path}/${this.options.name}.jsx`;
     
     this.fs.copyTpl(
       this.templatePath('_Component.jsx'),
@@ -72,6 +67,7 @@ module.exports = class extends Generator {
       this.destinationPath(`src/containers/${this.options['name']}Container.jsx`),
       {
         name: this.options['name'],
+        path: componentDestination,
       }
     ) : null;
 

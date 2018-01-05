@@ -3,27 +3,7 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
-
-
 module.exports = class extends Generator {
-
-
-  // constructor(args, options) {
-  //
-  //   super(args, options);
-  //
-  //   // Make options available
-  //   this.option('skip-welcome-message', {
-  //     desc: 'Skip the welcome message',
-  //     type: Boolean,
-  //     defaults: false
-  //   });
-  //
-  //
-  //
-  //   this.config.save();
-  // }
-
   prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(`Welcome to Imee's Practice ${chalk.red('generator-react')} generator`));
@@ -39,16 +19,11 @@ module.exports = class extends Generator {
     ];
 
     return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
       this.props = props;
     });
   }
 
   writing() {
-    // this.fs.copy(
-    //   this.templatePath('dummyfile.html'),
-    //   this.destinationPath('practicePath/dummyfile.html')
-    // );
     this.fs.copyTpl(
       this.templatePath('./_package.json'),
       this.destinationPath('package.json'),
@@ -64,19 +39,27 @@ module.exports = class extends Generator {
         name: this.props.name,
       }
     );
+
     this.fs.copy(
       this.templatePath('babelrc'),
       this.destinationPath('.babelrc')
     );
+
     this.fs.copy(
-      this.templatePath('bowerrc'),
-      this.destinationPath('.bowerrc')
+      this.templatePath('gitignore'),
+      this.destinationPath('.gitignore')
     );
 
     this.fs.copy(
       this.templatePath('_webpack.config.js'),
       this.destinationPath('webpack.config.js')
     );
+
+    this.fs.copy(
+      this.templatePath('bowerrc'),
+      this.destinationPath('.bowerrc')
+    );
+
     this.fs.copy(
       this.templatePath('_index.html'),
       this.destinationPath('index.html')
@@ -98,6 +81,21 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
+      this.templatePath('_tests/_App.spec.js'),
+      this.destinationPath('test/App.spec.js')
+    );
+
+    this.fs.copy(
+      this.templatePath('_testSetup.js'),
+      this.destinationPath('testSetup.js')
+    );
+
+    this.fs.copy(
+      this.templatePath('eslintrc.js'),
+      this.destinationPath('.eslintrc.js')
+    );
+
+    this.fs.copy(
       this.templatePath('_App.jsx'),
       this.destinationPath('src/components/App.jsx')
     );
@@ -107,27 +105,20 @@ module.exports = class extends Generator {
       this.destinationPath('src/reducers/index.js')
     );
 
+    this.fs.copy(
+      this.templatePath('_scss/_index.scss'),
+      this.destinationPath('src/scss/index.scss')
+    );
+
   }
 
   initializing() {
-   //  this.composeWith(require.resolve('../zap'));
     if(!this.options['skip-welcome-message']) {
-     //this.log(require('yeoman-welcome'));
      this.log('Out of the box I include Webpack and some default React components.\n');
    }
-
-
-    // this.composeWith(
-    //   'practice:express',e
-    //   { options: { my_opt: 'anystring' } },
-    //   { local: require.resolve('./express') },
-    // );
   }
 
   install() {
     this.installDependencies();
-    // if(!this.options['skip-install']) {
-    //   this.installDependencies({ bower: false });
-    // }
   }
 };

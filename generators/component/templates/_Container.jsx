@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 //import * as actions from '../actions/books';
-import <%= name %> from '../components/<%= name %>';
+import <%= name %> from '../<%= path %>';
 
 const mapStateToProps = state => ({});
 

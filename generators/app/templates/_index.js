@@ -8,12 +8,9 @@ import { ConnectedRouter } from 'react-router-redux';
 import configureStore from './store/configureStore';
 import configureHistory from './history/configureHistory';
 
-// import App from './components/App';
 import App from './components/App';
 
-
-// require('./scss/index.scss');
-//require('./output.css');
+require('./scss/index.scss');
 
 const store = configureStore();
 const history = configureHistory();
