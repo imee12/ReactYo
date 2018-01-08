@@ -18,21 +18,42 @@ module.exports = class extends Generator {
     defaults: "Component"
   });
 
-  this.log(this.options['name']);
-  // this.option('skip-install');
+  this.option('path', {
+      desc: 'path for component begining with src/components',
+      type: String,
+      defaults: 'src/components'
+    });
 
-  // Use our plain template as source
-  // this.sourceRoot(baseRootPath);
+    this.option('flux', {
+      desc: 'Determines if corresponding container is generated for a component',
+      type: Boolean,
+      defaults: true
+    });
 
-  this.config.save();
+    this.option('route', {
+      desc: 'Determines if corresponding route is generated for container',
+      type: Boolean,
+      defaults: true
+    });
+
+    this.option('url', {
+      desc: 'If route is generated, what should the path be',
+      type: String,
+      defaults: '/'
+    });
+
+    this.config.save();
 }
 
   prompting() {
-    console.log('prompting - zap');
   }
 
   writing() {
-    this.config.set('Component', this.options['name']);
+
+    const componentDestination = this.options.path !== 'src/components'
+          ? `src/components/${this.options.path}/${this.options.name}.jsx`
+          : `${this.options.path}/${this.options.name}.jsx`;
+
     this.fs.copyTpl(
       this.templatePath('_Component.jsx'),
       this.destinationPath('src/components/' + this.options['name'] + '.jsx'),
@@ -41,20 +62,23 @@ module.exports = class extends Generator {
       },
     );
 
-    this.fs.copyTpl(
+    this.options.flux ? this.fs.copyTpl(
       this.templatePath('_Container.jsx'),
-      this.destinationPath('src/containers/' + this.options['name'] + '.jsx'),
-      {
-        name: this.options['name'],
-      },
-    );
+      this.destinationPath(`src/containers/${this.options['name']}Container.jsx`),
+        {
+          name: this.options['name'],
+          path: componentDestination,
+        }
+      ) : null;
 
-    this.fs.copyTpl(
+    this.options.flux && this.options.route ? this.fs.copyTpl(
       this.templatePath('_App.jsx'),
       this.destinationPath('src/components/App.jsx'),
       {
         name: this.options['name'],
-      },
-    );
+        url: this.options['url'],
+        flux: this.options['flux'],
+      }
+    ) : null;
   }
 };

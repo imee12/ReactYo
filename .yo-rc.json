@@ -1,9 +1,7 @@
 {
-  "Oh": {
+  "Things": {
     "appName": "App",
     "test": "test"
   },
-  "App": {
-    "Component": "Stuff"
-  }
+  "App": {}
 }

@@ -1,4 +1,4 @@
 /* eslint-disable import/prefer-default-export */
 import { createAction } from 'redux-actions';
 
-export const <%= actionName %> = createAction('<%= actionName %>');
+export const <%= actionName %> = createAction('<%= actionNameCaps %>');

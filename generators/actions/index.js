@@ -28,12 +28,6 @@ module.exports = class extends Generator {
   this.log(this.options['component']);
 
 
-
-  // this.option('skip-install');
-
-  // Use our plain template as source
-  // this.sourceRoot(baseRootPath);
-
   this.config.save();
 }
 
@@ -56,6 +50,7 @@ module.exports = class extends Generator {
       this.destinationPath('src/actions/' + this.options['actionName'] + '.js'),
       {
         actionName: this.options['actionName'],
+        actionNameCaps: (this.options['actionName']).toUpperCase(),
       },
     );
 
