@@ -13,7 +13,6 @@ import App from './components/App';
 
 
  require('./scss/global.scss');
- //require('./styles.css');
 
 const store = configureStore();
 const history = configureHistory();
