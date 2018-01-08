@@ -3,5 +3,8 @@
     "appName": "App",
     "test": "test"
   },
-  "App": {}
+  "App": {
+    "appName": "App",
+    "test": "test"
+  }
 }

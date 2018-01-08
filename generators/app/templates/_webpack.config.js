@@ -1,24 +1,57 @@
+const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+//const StyleLintPlugin = require('stylelint-webpack-plugin');
+
+const PATHS = {
+  source: path.join(__dirname, 'src'),
+  jsout: path.join(__dirname, 'dist'),
+  htmlout: path.join(__dirname),
+};
+
+const styleOpts = {
+  configFile: path.join(__dirname, '.stylelintrc'),
+  context: path.join(__dirname, 'scss'),
+  files: '**/*.scss',
+};
 
 module.exports = {
   entry: {
-    app: [
+    'uikit': [
       'babel-polyfill',
       'react-hot-loader/patch',
-      './src/index.js',
+      `${PATHS.source}/index.js`
+    ],
+    'vendor': [
+    'react'
     ],
   },
   output: {
-    path: __dirname,
+    path: PATHS.jsout,
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
   devtool: 'eval',
   module: {
     rules: [
-      { test: /\.(js|jsx)?$/, exclude: /node_modules/, loader: 'babel-loader', query: { presets: ['react-hmre'] } },
-      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
-      { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
+      { test: /\.(js|jsx)?$/, exclude: /node_modules/, loader: 'babel-loader' },
+      { test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'postcss-loader']
+        })
+      },
+      { test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {loader: 'css-loader', options: {sourceMap: true}},
+            {loader: 'postcss-loader', options: {sourceMap: true}},
+            {loader: 'sass-loader', options: {sourceMap: true}},
+          ]
+        })
+      },
       { test: /\.(png|svg|jpg|gif)$/, use: 'file-loader?name=images/[name].[ext]' },
       { test: /\.(woff|woff2|eot|ttf|otf)$/, use: 'file-loader?name=fonts/[name].[ext]' },
     ],
@@ -27,11 +60,25 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', '.json'],
   },
   plugins: [
+    new ExtractTextPlugin('styles.css'),
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[name].js.map',
+      exclude: ['vendor.js', 'uikit.css']
+    }),
+    new HtmlWebpackPlugin({
+      filename: `${PATHS.jsout}/index.html`,
+      template: './index.html',
+      title: 'UI Kit',
+    }),
+    new StyleLintPlugin(styleOpts),
     new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
-    hot: true,
+    port: 9000,
+    contentBase: './dist',
     historyApiFallback: true,
-    contentBase: './',
-  },
+    hot: true,
+    open: true,
+    publicPath: 'http://localhost:9000/',
+  }
 };

@@ -88,6 +88,22 @@ module.exports = class extends Generator {
       this.templatePath('_webpack.config.js'),
       this.destinationPath('webpack.config.js'),
     );
+
+    this.fs.copy(
+      this.templatePath('_postcss.config.js'),
+      this.destinationPath('postcss.config.js'),
+    );
+
+    this.fs.copy(
+      this.templatePath('_eslintrc.js'),
+      this.destinationPath('eslintrc.js'),
+    );
+
+    this.fs.copy(
+      this.templatePath('_stylelintrc'),
+      this.destinationPath('.stylelintrc'),
+    );
+
     this.fs.copy(
       this.templatePath('_index.html'),
       this.destinationPath('index.html'),
@@ -137,6 +153,7 @@ module.exports = class extends Generator {
 
   install() {
     this.installDependencies();
+    this.composeWith('react:scss');
     // if(!this.options['skip-install']) {
     //   this.installDependencies({ bower: false });
     // }
