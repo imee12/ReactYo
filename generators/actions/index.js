@@ -54,13 +54,13 @@ module.exports = class extends Generator {
       },
     );
 
-    this.fs.copyTpl(
-      this.templatePath('_Container.jsx'),
-      this.destinationPath('src/containers/' + this.options['componentName'] + '.jsx'),
-      {
-        actionName: this.options['actionName'],
-        componentName: this.options['componentName'],
-      },
-    );
+    // this.fs.copyTpl(
+    //   this.templatePath('_Container.jsx'),
+    //   this.destinationPath('src/containers/' + this.options['componentName'] + '.jsx'),
+    //   {
+    //     actionName: this.options['actionName'],
+    //     componentName: this.options['componentName'],
+    //   },
+    // );
   }
 };
