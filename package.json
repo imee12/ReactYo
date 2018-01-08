@@ -1,7 +1,9 @@
 {
   "name": "App",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.js --progress --inline --hot --open"
+    "start": "webpack-dev-server --config webpack.config.js --progress --inline --hot --open",
+    "test": "BABEL_ENV=test mocha --compilers js:babel-core/register --require ./testSetup.js --recursive ./test",
+    "test:watch": "npm run test -- --watch"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",

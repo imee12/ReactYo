@@ -48,13 +48,26 @@ module.exports = class extends Generator {
 
   writing() {
 
+    this.fs.copyTpl(
+      this.templatePath('_testSetup.js'),
+      this.destinationPath('./testSetup.js'),
+      {
+        name: this.options['name'],
+      }
+    );
+
     const componentDestination = this.options.path
       ? `test/component/${this.options.path}/${this.options.name}.spec.js`
       : `test/component/${this.options.name}.spec.js`;
 
     const actionDestination = this.options.path
-      ? `test/action/${this.options.path}/${this.options.name}.spec.js`
-      : `test/action/${this.options.name}.spec.js`;
+      ? `test/actions/${this.options.path}/${this.options.name}.spec.js`
+      : `test/actions/${this.options.name}.spec.js`;
+
+    const reducerDestination = this.options.path
+      ? `test/reducers/${this.options.path}/${this.options.name}.spec.js`
+      : `test/reducers/${this.options.name}.spec.js`;
+
 
     this.fs.copyTpl(
       this.templatePath('_Component.js'),
@@ -70,6 +83,15 @@ module.exports = class extends Generator {
         {
           name: this.options['name'],
           path: actionDestination,
+        }
+      ) : null;
+
+    this.options.action ? this.fs.copyTpl(
+      this.templatePath('_reducer.js'),
+      this.destinationPath(reducerDestination),
+        {
+          name: this.options['name'],
+          path: reducerDestination,
         }
       ) : null;
   };
